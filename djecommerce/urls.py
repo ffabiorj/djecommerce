@@ -17,9 +17,13 @@ from django.conf.urls import url
 from django.contrib import admin
 
 
-from core.views import index
+from core import views
 
 urlpatterns = [
-    url(r'^$', index),
+    url(r'^$', views.index, name='index'),
+    url(r'^produto/$', views.product, name='product'),
+    url(r'^produtos/$', views.products, name='products' ),
+    url(r'^contato/$', views.contact, name='contact'),
+    
     url(r'^admin/', admin.site.urls),
 ]
