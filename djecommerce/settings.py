@@ -25,7 +25,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = '-=^vz&pf(%i+22l96x@lqgd_1x#udwqk#ul!^8o8*qiol_#q#5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -41,11 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'core',
+    'catalog',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -66,6 +67,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # app
+                'catalog.context_processors.categories',
             ],
         },
     },
@@ -138,3 +141,9 @@ ALLOWED_HOSTS = ['*']
 
 # Static files (CSS, Javascript, Images)
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
